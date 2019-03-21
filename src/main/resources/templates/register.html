@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>electroCom</title>
+    <style>
+        body#registerForm{
+          background: url("https://images.pexels.com/photos/1268477/pexels-photo-1268477.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          min-width: 400px;
+        }
+        .form-heading { color:#fff; font-size:23px;
+        }
+        .panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;
+        }
+        .panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
+        .register-form .form-control {
+          background: #f7f7f7 none repeat scroll 0 0;
+          border: 1px solid #d4d4d4;
+          width: 100%;
+          border-radius: 4px;
+          font-size: 14px;
+          height: 50px;
+          line-height: 50px;
+        }
+        .main-div {
+          background: #ffffff none repeat scroll 0 0;
+          border-radius: 2px;
+          margin: 30px auto 30px;
+          min-width:400px;
+          width: 38% !important;
+          width:400px;
+          padding: 50px 70px 70px 71px;
+        }
+
+        .register-form .form-group {
+          margin-bottom:10px;
+        }
+        .register-form{ text-align:center;}
+        .login a {
+          color: #777777;
+          font-size: 13px;
+          text-decoration: underline;
+        }
+        .register-form  .btn.btn-primary {
+          background: #1E90FF none repeat scroll 0 0;
+          border-color: #1E90FF;
+          color: #ffffff;
+          font-size: 14px;
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          padding: 0;
+        }
+        .login{
+          text-align: left; margin-bottom:30px;
+        }
+        .botto-text {
+          color: #ffffff;
+          font-size: 14px;
+          margin: auto;
+        }
+        .register-form .btn.btn-primary.reset {
+          background: #1E90FF none repeat scroll 0 0;
+        }
+        .back { text-align: left; margin-top:10px;}
+        .back a {color: #444444; font-size: 13px;text-decoration: none;}
+
+    </style>
+    <script>
+
+    </script>
+</head>
+ <body id="registerForm">
+
+
+    <div class="container">
+        <div class="register-form">
+            <div class="main-div">
+                <div class="panel">
+                    <h2>Register</h2>
+                    <p>Please complete all the fields</p>
+                </div>
+                <form th:action = "@{/register}" th:object = "${registerClient}" method="post" id="register" >
+                    <div class="form-group">
+                        <input name="firstName" type="text" class="form-control" id="firstName" placeholder="Firstname">
+                    </div>
+                    <div class="form-group">
+                        <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Lastname">
+                    </div>
+                    <div class="form-group">
+                        <input name="address" type="text" class="form-control" id="address" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <input name="phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Phone number">
+                    </div>
+                    <div class="form-group">
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input name="reEnterPassword" type="password" class="form-control" id="reEnterPassword" placeholder="Re-enter password">
+                    </div>
+                    <form-group th:action = "@{/login}" method="get" id="login">
+                        <div class="login">
+                            <a href="login">Log in!</a>
+                        </div>
+                    </form-group>
+
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <p1 style="width: auto; color: #d80100" th:if="${existingClient}">Email is already registered</p1>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

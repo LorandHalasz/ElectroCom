@@ -1,0 +1,123 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>electroCom</title>
+    <style>
+        #cars {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #cars td, #cars th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #cars tr:nth-child(even){background-color: #f2f2f2;}
+
+        #cars tr:hover {background-color: #ddd;}
+
+        #cars th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #3C0E03;
+            color: white;
+        }
+
+        .button1 {
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            cursor:pointer;
+            overflow: hidden;
+            outline:none;
+            color: #9fcdff;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">electroCom</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">Home</a></li>
+                <li class="dropdown" th:if="${notAdmin}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Produse<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/electronice}">Electronice</a></li>
+                        <li><a th:href="@{/electrocasnice}">Electrocasnice</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" th:if="${admin}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/electroniceAdmin}">Electronice</a></li>
+                        <li><a th:href="@{/electrocasniceAdmin}">Electrocasnice</a></li>
+                        <li><a th:href="@{/userAdmin}">Utilizatori</a></li>
+                    </ul>
+                </li>
+                <li class="active" th:if="${notAdmin}"><a href="/orders">Comenzi</a></li>
+                <li th:if="${admin}">
+                    <a th:href="@{/orderAdmin}">Administrare Comenzi</a>
+                </li>
+                <li th:if="${notAdmin}"><a href="/contactUs">Contact</a></li>
+                <li th:if="${admin}">
+                    <a th:href="@{/messageForAdmins}">Messages</a>
+
+                </li>
+            </ul>
+            <form th:action="@{/logout}" th:method="post">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="#"><span class="glyphicon glyphicon-user" th:text="${ actualUser.getFirstName()}"></span></a></li>
+                    <li><a href="/login" type="submit"><span class="glyphicon glyphicon-log-in" ></span> Logout</a></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid float-md-left">
+
+    <h1 class="mt-5">Comenzi</h1>
+    <br>
+    <br>
+
+    <div class="showCars">
+        <table id="orders" class="table table-striped" style="table-layout: fixed;">
+            <tr>
+                <th >Email</th>
+                <th>Produs</th>
+                <th>Data comenzii</th>
+            </tr>
+            <tbody th:each="order : ${orders}">
+            <tr>
+                <td th:text="${order.getEmail()}">Email</td>
+                <td th:text="${order.getProductName()}">Product</td>
+                <td th:text="${order.getOrderDate()}">Data comenzii</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

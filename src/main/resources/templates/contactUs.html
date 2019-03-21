@@ -1,0 +1,129 @@
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>electroCom</title>
+
+    <style>
+        @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+        #contact{
+            background-color:white;
+            font-family: 'Roboto', sans-serif;
+            min-height: auto;
+        }
+        #contact .well{
+            margin-top:30px;
+            border-radius:0;
+        }
+        #contact .form-control{
+            border-radius: 0;
+            border:2px solid #1e1e1e;
+        }
+        #contact button{
+            border-radius:0;
+            border:2px solid #1e1e1e;
+        }
+        #contact .row{
+            margin-bottom:15px;
+        }
+        @media (max-width: 768px) {
+            #contact iframe {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">electroCom</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home">Home</a></li>
+                <li class="dropdown" th:if="${notAdmin}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Produse<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/electronice}">Electronice</a></li>
+                        <li><a th:href="@{/electrocasnice}">Electrocasnice</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" th:if="${admin}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/electroniceAdmin}">Electronice</a></li>
+                        <li><a th:href="@{/electrocasniceAdmin}">Electrocasnice</a></li>
+                        <li><a th:href="@{/userAdmin}">Utilizatori</a></li>
+                    </ul>
+                </li>
+                <li th:if="${notAdmin}"><a href="/orders">Comenzi</a></li>
+                <li th:if="${admin}">
+                    <a th:href="@{/orderAdmin}">Administrare Comenzi</a>
+                </li>
+                <li class="active" th:if="${notAdmin}"><a href="/contactUs">Contact</a></li>
+                <li th:if="${admin}">
+                    <a th:href="@{/messageForAdmins}">Messages</a>
+
+                </li>
+            </ul>
+            <form th:action="@{/logout}" th:method="post">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="#"><span class="glyphicon glyphicon-user" th:text="${ actualUser.getFirstName()}"></span></a></li>
+                    <li><a href="/login" type="submit"><span class="glyphicon glyphicon-log-in" ></span> Logout</a></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</nav>
+    <section id="contact" >
+        <div class="container">
+            <div class="well well-sm">
+                <h3><strong>Contact Us</strong></h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1366.3822156474916!2d23.585309!3d46.7695396!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47490e9cd7ee7ccf%3A0xd07cf2f0fb4d6b39!2sStrada+Memorandumului%2C+Cluj-Napoca!5e0!3m2!1sro!2sro!4v1543146694256" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+
+                <div class="col-md-5">
+                    <h4><strong>Get in Touch</strong></h4>
+                    <form th:action="@{/contactReceiveMsg}" method="post">
+                            <div class="form-group">
+                            <input type="text" class="form-control" name="name" value="" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" value="" placeholder="E-mail">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" name="phone" value="" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="3" placeholder="Message"></textarea>
+                        </div>
+                        <button class="btn btn-default" type="submit" name="button">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
